@@ -64,4 +64,10 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        DataBaseHelper.getInstance(this).closeDB();
+    }
 }

@@ -20,15 +20,18 @@ import java.util.zip.ZipInputStream;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    Context context;
+    private static DataBaseHelper instance;
+
+    private Context context;
     private static final String DB_NAME = "universities";
 //    private static String DB_PATH = "/data/data/com.plorial.universities/databases/";
     private SQLiteDatabase dataBase;
+    private File DB_PATH;
 
-
-    public DataBaseHelper(Context context) {
+    private DataBaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
         this.context = context;
+        DB_PATH = context.getExternalCacheDir();
         createDataBase();
     }
 
@@ -42,9 +45,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void createDataBase() {
-        Log.d("LOG","createDataBase()");
-        File DB_PATH = context.getExternalCacheDir();
+    public static DataBaseHelper getInstance(Context context){
+        if(instance == null){
+            instance = new DataBaseHelper(context);
+        }
+        return instance;
+    }
+
+    public void closeDB(){
+        dataBase.close();
+    }
+
+    public SQLiteDatabase openDataBase() {
+        File dbFile = new File (DB_PATH,DB_NAME);
+        dataBase = SQLiteDatabase.openDatabase(dbFile.getAbsolutePath(), null, SQLiteDatabase.OPEN_READONLY);
+        return dataBase;
+    }
+
+    private void createDataBase() {
         DB_PATH.mkdirs();
         File db = new File(DB_PATH, DB_NAME);
         if (!db.exists()) {
@@ -59,7 +77,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private void copyFromZipFile() throws IOException{
         InputStream is = context.getResources().openRawResource(R.raw.universities_db);
-        File outFile = new File(context.getExternalCacheDir() ,DB_NAME);
+        File outFile = new File(DB_PATH ,DB_NAME);
         OutputStream myOutput = new FileOutputStream(outFile.getAbsolutePath());
         ZipInputStream zis = new ZipInputStream(new BufferedInputStream(is));
         try {
@@ -80,12 +98,5 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             myOutput.close();
             is.close();
         }
-    }
-
-    public SQLiteDatabase openDataBase() {
-        File DB_PATH = context.getExternalCacheDir();
-        File dbFile = new File (DB_PATH,DB_NAME);
-        dataBase = SQLiteDatabase.openDatabase(dbFile.getAbsolutePath(), null, SQLiteDatabase.OPEN_READWRITE);
-        return dataBase;
     }
 }

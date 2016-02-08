@@ -11,7 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -26,6 +28,8 @@ public class UniversitiesActivity extends AppCompatActivity {
 
     private TableLayout tableLayout;
     private int universitiesCount;
+    private final int TAG_KEY = R.id.tableLayout;
+    public static final String EXTRA_KEY_UNIVERSITY = "University_id";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,11 +63,15 @@ public class UniversitiesActivity extends AppCompatActivity {
 
             tableRow.setPadding(5, 10, 5, 10);
             tvUniversityName.setPadding(0,0,5,0);
-            
+
             tvUniversityName.setTextSize(16);
             tvUniversityCity.setTextSize(16);
 
-            tvUniversityName.setWidth(screenDivider*3);
+            tableRow.setTag(TAG_KEY, new Integer(Integer.parseInt(ids[i])));
+            tableRow.setOnClickListener(new TableRowClickListener());
+            tableRow.setClickable(true);
+
+            tvUniversityName.setWidth(screenDivider*3 - 15);
             tvUniversityCity.setWidth(screenDivider);
 
             tvUniversityName.setText(cursor.getString(cursor.getColumnIndex("NAME")));
@@ -73,6 +81,19 @@ public class UniversitiesActivity extends AppCompatActivity {
             tableRow.addView(tvUniversityCity);
 
             tableLayout.addView(tableRow);
+        }
+    }
+
+    private class TableRowClickListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            TableRow tr = (TableRow) v;
+            int i = (int) tr.getTag(TAG_KEY);
+            Log.d("LOG", "university id from row " + i);
+            Intent intent = new Intent(v.getContext(), UniversityActivity.class);
+            intent.putExtra(EXTRA_KEY_UNIVERSITY,String.valueOf(i));
+            startActivity(intent);
         }
     }
 }

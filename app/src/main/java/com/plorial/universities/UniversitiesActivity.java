@@ -57,6 +57,12 @@ public class UniversitiesActivity extends AppCompatActivity {
             TextView tvUniversityName = new TextView(this);
             TextView tvUniversityCity = new TextView(this);
 
+            tableRow.setPadding(5, 10, 5, 10);
+            tvUniversityName.setPadding(0,0,5,0);
+            
+            tvUniversityName.setTextSize(16);
+            tvUniversityCity.setTextSize(16);
+
             tvUniversityName.setWidth(screenDivider*3);
             tvUniversityCity.setWidth(screenDivider);
 

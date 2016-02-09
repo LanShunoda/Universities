@@ -29,5 +29,25 @@ public class UniversityActivity extends AppCompatActivity {
         name.setText(cursor.getString(cursor.getColumnIndex("NAME")));
         TextView city = (TextView) findViewById(R.id.tvCity);
         city.setText(cursor.getString(cursor.getColumnIndex("CITY")));
+        TextView year = (TextView) findViewById(R.id.tvYear);
+        year.setText(cursor.getString(cursor.getColumnIndex("YEAR")));
+        TextView status = (TextView) findViewById(R.id.tvStatus);
+        status.setText(cursor.getString(cursor.getColumnIndex("STATUS")));
+        TextView acreditation = (TextView) findViewById(R.id.tvAcreditation);
+        acreditation.setText(cursor.getString(cursor.getColumnIndex("ACCREDITATION")));
+        TextView document = (TextView) findViewById(R.id.tvDocument);
+        document.setText(cursor.getString(cursor.getColumnIndex("DOCUMENT")));
+        TextView form = (TextView) findViewById(R.id.tvFormOfEducation);
+        form.setText(cursor.getString(cursor.getColumnIndex("FORM_OF_EDUCATION")));
+        TextView qualification = (TextView) findViewById(R.id.tvQualification);
+        qualification.setText(cursor.getString(cursor.getColumnIndex("QUALIFICATION")));
+        TextView address = (TextView) findViewById(R.id.tvAddress);
+        address.setText(cursor.getString(cursor.getColumnIndex("ADDRESS")));
+        TextView telephone = (TextView) findViewById(R.id.tvTelephone);
+        telephone.setText(cursor.getString(cursor.getColumnIndex("TELEPHONE")));
+        TextView telephoneOfSelectionCommittee = (TextView) findViewById(R.id.tvTelephoneOfSelectionCommittee);
+        telephoneOfSelectionCommittee.setText(cursor.getString(cursor.getColumnIndex("TELEPHONE_OF_SELECTION_COMMITTEE")));
+        TextView site = (TextView) findViewById(R.id.tvSite);
+        site.setText(cursor.getString(cursor.getColumnIndex("SITE")));
     }
 }

@@ -23,11 +23,12 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
-                android:id="@+id/tvName" />
+                android:id="@+id/tvName"
+                android:layout_span="2"/>
         </TableRow>
 
         <TableRow
@@ -39,8 +40,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="City:"
-                android:layout_weight="1"
-                android:layout_column="0" />
+                android:layout_weight="1" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -48,8 +48,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
                 android:id="@+id/tvCity"
-                android:layout_weight="2"
-                android:layout_column="1" />
+                android:layout_weight="2" />
         </TableRow>
 
         <TableRow
@@ -61,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Year:"
-                android:layout_column="0"
                 android:layout_weight="1" />
 
             <TextView
@@ -70,7 +68,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
                 android:id="@+id/tvYear"
-                android:layout_column="1"
                 android:layout_weight="2" />
         </TableRow>
 
@@ -83,7 +80,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Status:"
-                android:layout_column="0"
                 android:layout_weight="1" />
 
             <TextView
@@ -92,7 +88,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
                 android:id="@+id/tvStatus"
-                android:layout_column="1"
                 android:layout_weight="2" />
         </TableRow>
 
@@ -172,8 +167,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/tvQualification"
-                android:layout_weight="2"
-                android:text="tvQualification" />
+                android:text="tvQualification"
+                android:layout_weight="2" />
         </TableRow>
 
         <TableRow
@@ -232,7 +227,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
-                android:id="@+id/textView3"
+                android:id="@+id/tvTelephoneOfSelectionCommittee"
                 android:layout_weight="2" />
         </TableRow>
 
@@ -244,14 +239,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Site" />
+                android:text="Site"
+                android:layout_weight="1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
-                android:id="@+id/tvSite" />
+                android:id="@+id/tvSite"
+                android:layout_weight="2" />
         </TableRow>
     </TableLayout>
 

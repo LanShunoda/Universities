@@ -248,14 +248,22 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
                 android:id="@+id/tvSite"
-                android:layout_weight="2" />
+                android:layout_weight="2"
+                android:autoLink="web" />
         </TableRow>
     </TableLayout>
 
-    <ListView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lvTrainingAreas" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Training Areas:" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvTrainingAreas"
+        android:orientation="vertical" />
 
     <ExpandableListView
         android:layout_width="wrap_content"

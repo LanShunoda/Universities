@@ -49,7 +49,7 @@ public class UniversitiesActivity extends AppCompatActivity {
         universitiesCount = ids.length;
         DataBaseHelper dbHelper = DataBaseHelper.getInstance(this);
         SQLiteDatabase db = dbHelper.openDataBase();
-        Cursor cursor = db.query("UNIVERSITIES", new String[]{"NAME", "CITY"}, null, null, null, null, null);
+        Cursor cursor = db.query(UniversitiesTable.TABLE_NAME.toString(), new String[]{UniversitiesTable.NAME.toString(), UniversitiesTable.CITY.toString()}, null, null, null, null, null);
 
         Display d = getWindowManager().getDefaultDisplay();
         int screenDivider = d.getWidth()/4;
@@ -74,8 +74,8 @@ public class UniversitiesActivity extends AppCompatActivity {
             tvUniversityName.setWidth(screenDivider*3 - 15);
             tvUniversityCity.setWidth(screenDivider);
 
-            tvUniversityName.setText(cursor.getString(cursor.getColumnIndex("NAME")));
-            tvUniversityCity.setText(cursor.getString(cursor.getColumnIndex("CITY")));
+            tvUniversityName.setText(cursor.getString(cursor.getColumnIndex(UniversitiesTable.NAME.toString())));
+            tvUniversityCity.setText(cursor.getString(cursor.getColumnIndex(UniversitiesTable.CITY.toString())));
 
             tableRow.addView(tvUniversityName);
             tableRow.addView(tvUniversityCity);
@@ -90,7 +90,6 @@ public class UniversitiesActivity extends AppCompatActivity {
         public void onClick(View v) {
             TableRow tr = (TableRow) v;
             int i = (int) tr.getTag(TAG_KEY);
-            Log.d("LOG", "university id from row " + i);
             Intent intent = new Intent(v.getContext(), UniversityActivity.class);
             intent.putExtra(EXTRA_KEY_UNIVERSITY,String.valueOf(i));
             startActivity(intent);

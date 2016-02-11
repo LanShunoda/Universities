@@ -46,7 +46,7 @@ public class UniversityActivity extends AppCompatActivity {
 
     private void addFaculties(Cursor cursor) {
         String faculties = cursor.getString(cursor.getColumnIndex(UniversitiesTable.FACULTIES.toString()));
-        if(faculties.equals("{}"))
+        if(faculties.equals("{}") || faculties.equals("{Специальности=[]}"))
             return;
         Map<String,String[]> mapFaculties = parseFaculties(faculties);
         LinearLayout linearLayoutFaculties = (LinearLayout) findViewById(R.id.lvFaculties);
@@ -80,14 +80,16 @@ public class UniversityActivity extends AppCompatActivity {
     private Map<String, String[]> parseFaculties(String s) {
         HashMap<String, String[]> result = new HashMap<>();
         String[] splited = s.split("\\]");
-        Log.d("LOG", "splided by ] " + Arrays.toString(splited));
         for(int i = 0; i < splited.length - 1; i++){
             String[] strings = splited[i].split("\\[");
-            Log.d("LOG", "splided by [ " + Arrays.toString(strings));
             String key = strings[0].substring(1,strings[0].length()-1);
-            Log.d("LOG", "splided key " + key);
-            String[] values = strings[1].split("\\;\\,");
-            Log.d("LOG", "splided by ;, values  " + Arrays.toString(values));
+            String[] values;
+            if(strings.length > 1) {
+                values = strings[1].split("\\;\\,");
+            }
+            else {
+                values = new String[]{};
+            }
             result.put(key, values);
         }
         return result;

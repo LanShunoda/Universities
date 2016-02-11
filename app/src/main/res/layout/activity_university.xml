@@ -12,7 +12,8 @@
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="5dp">
 
     <TextView
         android:layout_width="fill_parent"
@@ -20,7 +21,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/tvName"
-        android:layout_span="2"/>
+        android:layout_span="2"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -252,19 +255,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Training Areas:" />
+        android:text="Training Areas:"
+        android:layout_marginTop="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lvTrainingAreas"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="20dp" />
 
-    <ExpandableListView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/elvFaculties"
-        android:layout_weight="1" />
+        android:id="@+id/lvFaculties"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="match_parent"

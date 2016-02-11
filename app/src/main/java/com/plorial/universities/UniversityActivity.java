@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static android.R.style.TextAppearance_Large;
 import static android.R.style.TextAppearance_Medium;
 
 /**
@@ -47,16 +48,37 @@ public class UniversityActivity extends AppCompatActivity {
         String faculties = cursor.getString(cursor.getColumnIndex(UniversitiesTable.FACULTIES.toString()));
         if(faculties.equals("{}"))
             return;
-        HashMap<String,List<String>> children = parseFaculties(faculties);
-       List<String> header = new ArrayList<>();
-        header.addAll(children.keySet());
-        ExpandableListAdapter adapter = new ExpandableListAdapter(this,header,children);
-        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.elvFaculties);
-        expandableListView.setAdapter(adapter);
+        Map<String,String[]> mapFaculties = parseFaculties(faculties);
+        LinearLayout linearLayoutFaculties = (LinearLayout) findViewById(R.id.lvFaculties);
+        for (Map.Entry<String,String[]> entry : mapFaculties.entrySet()){
+            TextView header = new TextView(this);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                header.setTextAppearance(TextAppearance_Large);
+            }else {
+                header.setTextAppearance(this, TextAppearance_Large);
+            }
+            header.setText(entry.getKey());
+            linearLayoutFaculties.addView(header);
+            LinearLayout childrenLayout = new LinearLayout(this);
+            childrenLayout.setOrientation(LinearLayout.VERTICAL);
+            childrenLayout.setPadding(20,0, 0, 0);
+            String[] values = entry.getValue();
+            for(String s : values){
+                TextView child = new TextView(this);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    child.setTextAppearance(TextAppearance_Medium);
+                }else {
+                    child.setTextAppearance(this, TextAppearance_Medium);
+                }
+                child.setText(s);
+                childrenLayout.addView(child);
+            }
+            linearLayoutFaculties.addView(childrenLayout);
+        }
     }
 
-    private HashMap parseFaculties(String s) {
-        HashMap<String, List<String>> result = new HashMap<>();
+    private Map<String, String[]> parseFaculties(String s) {
+        HashMap<String, String[]> result = new HashMap<>();
         String[] splited = s.split("\\]");
         Log.d("LOG", "splided by ] " + Arrays.toString(splited));
         for(int i = 0; i < splited.length - 1; i++){
@@ -66,7 +88,7 @@ public class UniversityActivity extends AppCompatActivity {
             Log.d("LOG", "splided key " + key);
             String[] values = strings[1].split("\\;\\,");
             Log.d("LOG", "splided by ;, values  " + Arrays.toString(values));
-            result.put(key, Arrays.asList(values));
+            result.put(key, values);
         }
         return result;
     }

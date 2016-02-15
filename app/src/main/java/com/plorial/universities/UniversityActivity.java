@@ -1,23 +1,30 @@
 package com.plorial.universities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,16 +36,28 @@ import static android.R.style.TextAppearance_Medium;
  */
 public class UniversityActivity extends BaseActivity {
 
+    private String idOfUniversity;
+    private Button button;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university);
         setActionBarHomeButton();
+        button = (Button) findViewById(R.id.bAddToFavourites);
+
         SQLiteDatabase db = DataBaseHelper.getInstance(this).openDataBase();
 
         Cursor cursor = db.query(UniversitiesTable.TABLE_NAME.toString(), UniversitiesTable.TABLE_NAME.getTableColumns(), null, null, null, null, null);
         Intent intent = getIntent();
-        String idOfUniversity = intent.getStringExtra(UniversitiesActivity.EXTRA_KEY_UNIVERSITY);
+        idOfUniversity = intent.getStringExtra(UniversitiesActivity.EXTRA_KEY_UNIVERSITY);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+            Set<String> idesUniversities = getSharedPreferences(BaseActivity.FAVOURITE_UNIVERSITIES, MODE_PRIVATE).getStringSet(BaseActivity.FAVOURITE_UNIVERSITIES, null);
+            if(idesUniversities != null && idesUniversities.contains(idOfUniversity)){
+                button.setText(R.string.bRemoveFromFavourites);
+            }
+        }
 
         cursor.moveToPosition(Integer.parseInt(idOfUniversity) - 1);
 
@@ -159,14 +178,27 @@ public class UniversityActivity extends BaseActivity {
         return list;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
+    public void addToFavourites(View view){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+            SharedPreferences preferences = getSharedPreferences(BaseActivity.FAVOURITE_UNIVERSITIES, MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            if (button.getText().toString().equals(getString(R.string.bAddToFavourites))) {
+                Set<String> idesUniversities = preferences.getStringSet(BaseActivity.FAVOURITE_UNIVERSITIES, new HashSet<String>());
+                idesUniversities.add(idOfUniversity);
+                editor.putStringSet(BaseActivity.FAVOURITE_UNIVERSITIES, idesUniversities);
+                button.setText(R.string.bRemoveFromFavourites);
+                editor.commit();
+                return;
+            }else if (button.getText().toString().equals(getString(R.string.bRemoveFromFavourites))){
+                Set<String> idesUniversities = preferences.getStringSet(BaseActivity.FAVOURITE_UNIVERSITIES, null);
+                idesUniversities.remove(idOfUniversity);
+                editor.putStringSet(BaseActivity.FAVOURITE_UNIVERSITIES, idesUniversities);
+                button.setText(R.string.bAddToFavourites);
+                editor.commit();
+                return;
+            }
+        }else{
+            Toast.makeText(this,"Cant add to favourites on this android version",Toast.LENGTH_LONG).show();
         }
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -277,8 +277,9 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add to Favourites"
-        android:id="@+id/bAddToFavourites" />
+        android:id="@+id/bAddToFavourites"
+        android:onClick="addToFavourites"
+        android:text="@string/bAddToFavourites"/>
 
 </LinearLayout>
 </ScrollView>

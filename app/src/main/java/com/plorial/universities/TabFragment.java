@@ -17,7 +17,6 @@ import java.util.ArrayList;
  */
 public class TabFragment extends ListFragment {
 
-    public static final String ID_OF_UNIVERSITIES = "idOfUniversities";
     private String table;
     private String column;
     private Cursor cursor;
@@ -57,7 +56,7 @@ public class TabFragment extends ListFragment {
         cursor.moveToPosition(position);
         String idOfUniversities = cursor.getString(cursor.getColumnIndex("idOfUniversity"));
         Intent intent = new Intent(getContext(),UniversitiesActivity.class);
-        intent.putExtra(ID_OF_UNIVERSITIES,idOfUniversities);
+        intent.putExtra(BaseActivity.ID_OF_UNIVERSITIES,idOfUniversities);
         startActivity(intent);
     }
 

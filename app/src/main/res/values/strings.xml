@@ -5,4 +5,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_favourites">Favourites</string>
+    <string name="bAddToFavourites">Add to Favourites</string>
+    <string name="bRemoveFromFavourites">Remove From Favourites</string>
 </resources>

@@ -44,7 +44,7 @@ public class UniversitiesActivity extends BaseActivity {
 
     private void fillTable() {
         Intent intent = getIntent();
-        String idOfUniversities = intent.getStringExtra(TabFragment.ID_OF_UNIVERSITIES);
+        String idOfUniversities = intent.getStringExtra(BaseActivity.ID_OF_UNIVERSITIES);
         String[] ids = idOfUniversities.split(", ");
         ids[0] = ids[0].substring(1,ids[0].length());
         ids[ids.length - 1] = ids[ids.length - 1].substring(0, ids[ids.length - 1].length() - 1);
@@ -97,16 +97,5 @@ public class UniversitiesActivity extends BaseActivity {
             intent.putExtra(EXTRA_KEY_UNIVERSITY,String.valueOf(i));
             startActivity(intent);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

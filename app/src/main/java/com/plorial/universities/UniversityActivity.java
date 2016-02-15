@@ -33,11 +33,7 @@ public class UniversityActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university);
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setActionBarHomeButton();
         SQLiteDatabase db = DataBaseHelper.getInstance(this).openDataBase();
 
         Cursor cursor = db.query(UniversitiesTable.TABLE_NAME.toString(), UniversitiesTable.TABLE_NAME.getTableColumns(), null, null, null, null, null);

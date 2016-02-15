@@ -37,11 +37,7 @@ public class UniversitiesActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_universities);
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setActionBarHomeButton();
         tableLayout = (TableLayout) findViewById(R.id.tableLayout);
         fillTable();
     }

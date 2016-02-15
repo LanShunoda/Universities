@@ -7,10 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Display;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -24,7 +26,7 @@ import java.util.Arrays;
 /**
  * Created by plorial on 07.02.16.
  */
-public class UniversitiesActivity extends AppCompatActivity {
+public class UniversitiesActivity extends BaseActivity {
 
     private TableLayout tableLayout;
     private int universitiesCount;
@@ -35,7 +37,11 @@ public class UniversitiesActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_universities);
-
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         tableLayout = (TableLayout) findViewById(R.id.tableLayout);
         fillTable();
     }
@@ -82,6 +88,7 @@ public class UniversitiesActivity extends AppCompatActivity {
 
             tableLayout.addView(tableRow);
         }
+        cursor.close();
     }
 
     private class TableRowClickListener implements View.OnClickListener{
@@ -94,5 +101,16 @@ public class UniversitiesActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_KEY_UNIVERSITY,String.valueOf(i));
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

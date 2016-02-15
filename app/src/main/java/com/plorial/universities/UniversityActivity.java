@@ -5,8 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,12 +27,17 @@ import static android.R.style.TextAppearance_Medium;
 /**
  * Created by plorial on 09.02.16.
  */
-public class UniversityActivity extends AppCompatActivity {
+public class UniversityActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         SQLiteDatabase db = DataBaseHelper.getInstance(this).openDataBase();
 
         Cursor cursor = db.query(UniversitiesTable.TABLE_NAME.toString(), UniversitiesTable.TABLE_NAME.getTableColumns(), null, null, null, null, null);
@@ -75,6 +82,7 @@ public class UniversityActivity extends AppCompatActivity {
             }
             linearLayoutFaculties.addView(childrenLayout);
         }
+        cursor.close();
     }
 
     private Map<String, String[]> parseFaculties(String s) {
@@ -153,5 +161,16 @@ public class UniversityActivity extends AppCompatActivity {
             list.add(trainArea);
         }
         return list;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

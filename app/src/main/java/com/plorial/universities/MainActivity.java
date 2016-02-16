@@ -15,8 +15,8 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Cities"));
-        tabLayout.addTab(tabLayout.newTab().setText("Training Areas"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tabByCities));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tabByTrainingAreas));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

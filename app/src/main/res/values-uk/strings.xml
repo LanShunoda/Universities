@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Вузы</string>
+    <string name="action_favourites">Закладки</string>
+    <string name="bAddToFavourites">Добавить в закладки</string>
+    <string name="bRemoveFromFavourites">Удалить из закладок</string>
+    <string name="tabByCities">По городам</string>
+    <string name="tabByTrainingAreas">По направлениям</string>
+    <string name="tvAccreditation">Аккредитация:</string>
+    <string name="tvAddress">Адрес:</string>
+    <string name="tvCity">Город:</string>
+    <string name="tvDocument">Документ об окончании:</string>
+    <string name="tvFaculties">Факультеты:</string>
+    <string name="tvFormOfEducation">Форма обучения:</string>
+    <string name="tvQualification">Квалиф. уровни:</string>
+    <string name="tvSite">Сайт:	</string>
+    <string name="tvStatus">Статус:	</string>
+    <string name="tvTelephone">Телефон:</string>
+    <string name="tvTelephoneOfCommittee">Телефон приемной комиссии:</string>
+    <string name="tvTrainingAreas">Направления обучения:</string>
+    <string name="tvYear">Год основания:</string>
+    <string name="bAddToFavouritesError">Нельзя добавить в закладки в этой версии Андроид</string>
+    <string name="emptyFavourites">Нету Вузов в закладках</string>
+    <string name="favouritesAndroidVersionError">Нету закладок на этой версии андроид</string>
+    <string name="noFaculties">Нет информации о факультетах</string>
+</resources>

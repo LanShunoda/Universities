@@ -12,7 +12,7 @@
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="5dp">
 
     <TextView
@@ -21,7 +21,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/tvName"
-        android:layout_span="2"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp" />
 
@@ -37,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="City:"
+                android:text="@string/tvCity"
                 android:layout_weight="1" />
 
             <TextView
@@ -57,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Year:"
+                android:text="@string/tvYear"
                 android:layout_weight="1" />
 
             <TextView
@@ -77,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Status:"
+                android:text="@string/tvStatus"
                 android:layout_weight="1" />
 
             <TextView
@@ -97,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Acreditation:"
+                android:text="@string/tvAccreditation"
                 android:layout_weight="1" />
 
             <TextView
@@ -105,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Medium Text"
-                android:id="@+id/tvAcreditation"
+                android:id="@+id/tvAccreditation"
                 android:layout_weight="2" />
         </TableRow>
 
@@ -117,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Document:"
+                android:text="@string/tvDocument"
                 android:layout_weight="1" />
 
             <TextView
@@ -137,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Form of education"
+                android:text="@string/tvFormOfEducation"
                 android:layout_weight="1" />
 
             <TextView
@@ -157,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Qualification"
+                android:text="@string/tvQualification"
                 android:layout_weight="1" />
 
             <TextView
@@ -177,7 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Address"
+                android:text="@string/tvAddress"
                 android:layout_weight="1" />
 
             <TextView
@@ -197,7 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Telephone"
+                android:text="@string/tvTelephone"
                 android:layout_weight="1" />
 
             <TextView
@@ -217,7 +216,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Telephone of selection commitee"
+                android:text="@string/tvTelephoneOfCommittee"
                 android:layout_weight="1" />
 
             <TextView
@@ -237,7 +236,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Site"
+                android:text="@string/tvSite"
                 android:layout_weight="1" />
 
             <TextView
@@ -255,8 +254,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Training Areas:"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:text="@string/tvTrainingAreas"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -265,6 +264,13 @@
         android:orientation="vertical"
         android:layout_marginTop="10dp"
         android:paddingLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="10dp"
+        android:text="@string/tvFaculties"/>
 
     <LinearLayout
         android:layout_width="match_parent"

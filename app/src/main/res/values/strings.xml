@@ -1,10 +1,26 @@
 <resources>
     <string name="app_name">Universities</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_favourites">Favourites</string>
     <string name="bAddToFavourites">Add to Favourites</string>
     <string name="bRemoveFromFavourites">Remove From Favourites</string>
+    <string name="tvTrainingAreas">Training Areas:</string>
+    <string name="tvFaculties">Faculties:</string>
+    <string name="tvSite">University site:</string>
+    <string name="tvTelephoneOfCommittee">Telephone of select. comm.:</string>
+    <string name="tvTelephone">Telephone:</string>
+    <string name="tvAddress">Address:</string>
+    <string name="tvQualification">Qualification:</string>
+    <string name="tvFormOfEducation">Form of education:</string>
+    <string name="tvDocument">Document:</string>
+    <string name="tvAccreditation">Accreditation:</string>
+    <string name="tvStatus">Status:</string>
+    <string name="tvYear">Year:</string>
+    <string name="tvCity">City:</string>
+    <string name="tabByCities">By cities</string>
+    <string name="tabByTrainingAreas">By training areas</string>
+    <string name="bAddToFavouritesError">Cant add to favourites on this android version</string>
+    <string name="emptyFavourites">You dont have favourites</string>
+    <string name="favouritesAndroidVersionError">no favourites on this android version</string>
+    <string name="noFaculties">There is no information about faculties</string>
 </resources>

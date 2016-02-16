@@ -2,18 +2,13 @@ package com.plorial.universities;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -31,7 +26,10 @@ public class BaseActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_favourites:
-                startUniversitiesActivityWithFavourites();
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+                    startUniversitiesActivityWithFavourites();
+                }else
+                    Toast.makeText(this,getString(R.string.favouritesAndroidVersionError),Toast.LENGTH_LONG).show();
                 return true;
         }       
         return super.onOptionsItemSelected(item);
@@ -46,7 +44,7 @@ public class BaseActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else
-            Toast.makeText(this,"You dont have favourites",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,getString(R.string.emptyFavourites),Toast.LENGTH_LONG).show();
     }
 
     @Override

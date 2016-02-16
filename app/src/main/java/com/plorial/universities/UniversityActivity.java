@@ -6,20 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v4.content.SharedPreferencesCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -68,10 +61,20 @@ public class UniversityActivity extends BaseActivity {
 
     private void addFaculties(Cursor cursor) {
         String faculties = cursor.getString(cursor.getColumnIndex(UniversitiesTable.FACULTIES.toString()));
-        if(faculties.equals("{}") || faculties.equals("{Специальности=[]}"))
-            return;
-        Map<String,String[]> mapFaculties = parseFaculties(faculties);
         LinearLayout linearLayoutFaculties = (LinearLayout) findViewById(R.id.lvFaculties);
+        if(faculties.equals("{}") || faculties.equals("{Специальности=[]}")) {
+            TextView header = new TextView(this);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                header.setTextAppearance(TextAppearance_Medium);
+            }else {
+                header.setTextAppearance(this, TextAppearance_Medium);
+            }
+            header.setText(R.string.noFaculties);
+            linearLayoutFaculties.addView(header);
+            return;
+        }
+        Map<String,String[]> mapFaculties = parseFaculties(faculties);
+
         for (Map.Entry<String,String[]> entry : mapFaculties.entrySet()){
             TextView header = new TextView(this);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -92,7 +95,7 @@ public class UniversityActivity extends BaseActivity {
                 }else {
                     child.setTextAppearance(this, TextAppearance_Medium);
                 }
-                child.setText(s);
+                child.setText("- " + s);
                 childrenLayout.addView(child);
             }
             linearLayoutFaculties.addView(childrenLayout);
@@ -127,7 +130,7 @@ public class UniversityActivity extends BaseActivity {
         year.setText(cursor.getString(cursor.getColumnIndex(UniversitiesTable.YEAR.toString())));
         TextView status = (TextView) findViewById(R.id.tvStatus);
         status.setText(cursor.getString(cursor.getColumnIndex(UniversitiesTable.STATUS.toString())));
-        TextView accreditation = (TextView) findViewById(R.id.tvAcreditation);
+        TextView accreditation = (TextView) findViewById(R.id.tvAccreditation);
         accreditation.setText(cursor.getString(cursor.getColumnIndex(UniversitiesTable.ACCREDITATION.toString())));
         TextView document = (TextView) findViewById(R.id.tvDocument);
         document.setText(cursor.getString(cursor.getColumnIndex(UniversitiesTable.DOCUMENT.toString())));
@@ -155,7 +158,7 @@ public class UniversityActivity extends BaseActivity {
             }else {
                 tv.setTextAppearance(this, TextAppearance_Medium);
             }
-            tv.setText(s);
+            tv.setText("- " + s);
             trainingAreas.addView(tv);
         }
     }
@@ -198,7 +201,7 @@ public class UniversityActivity extends BaseActivity {
                 return;
             }
         }else{
-            Toast.makeText(this,"Cant add to favourites on this android version",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,getString(R.string.bAddToFavouritesError),Toast.LENGTH_LONG).show();
         }
     }
 }

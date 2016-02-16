@@ -3,6 +3,7 @@ package com.plorial.universities;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -24,14 +25,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DB_NAME = "universities";
-//    private static String DB_PATH = "/data/data/com.plorial.universities/databases/";
     private SQLiteDatabase dataBase;
     private File DB_PATH;
 
     private DataBaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
         this.context = context;
-        DB_PATH = context.getExternalCacheDir();
+        DB_PATH = context.getFilesDir();
         createDataBase();
     }
 
@@ -63,10 +63,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     private void createDataBase() {
-        DB_PATH.mkdirs();
         File db = new File(DB_PATH, DB_NAME);
         if (!db.exists()) {
             try {
+                db.getParentFile().mkdirs();
                 db.createNewFile();
                 copyFromZipFile();
             } catch (IOException e) {

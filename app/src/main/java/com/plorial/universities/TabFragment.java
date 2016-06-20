@@ -21,6 +21,8 @@ public class TabFragment extends ListFragment {
     private String column;
     private Cursor cursor;
 
+    public TabFragment(){}
+
     @SuppressLint("ValidFragment")
     public TabFragment(String table, String column) {
         super();

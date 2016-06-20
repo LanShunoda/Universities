@@ -16,7 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,9 +31,8 @@ import java.util.Arrays;
  */
 public class UniversitiesActivity extends BaseActivity {
 
-    private TableLayout tableLayout;
+    private ListView listView;
     private int universitiesCount;
-    private final int TAG_KEY = R.id.tableLayout;
     public static final String EXTRA_KEY_UNIVERSITY = "University_id";
 
     @Override
@@ -38,7 +40,18 @@ public class UniversitiesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_universities);
         setActionBarHomeButton();
-        tableLayout = (TableLayout) findViewById(R.id.tableLayout);
+        listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Item item = (Item) parent.getItemAtPosition(position);
+                int i = item.getTag();
+                Intent intent = new Intent(view.getContext(), UniversityActivity.class);
+                intent.putExtra(EXTRA_KEY_UNIVERSITY,String.valueOf(i));
+                startActivity(intent);
+            }
+        });
         fillTable();
     }
 
@@ -52,50 +65,17 @@ public class UniversitiesActivity extends BaseActivity {
         DataBaseHelper dbHelper = DataBaseHelper.getInstance(this);
         SQLiteDatabase db = dbHelper.openDataBase();
         Cursor cursor = db.query(UniversitiesTable.TABLE_NAME.toString(), new String[]{UniversitiesTable.NAME.toString(), UniversitiesTable.CITY.toString()}, null, null, null, null, null);
+        ItemAdapter adapter = new ItemAdapter(this, R.layout.item);
+        listView.setAdapter(adapter);
 
-        Display d = getWindowManager().getDefaultDisplay();
-        int screenDivider = d.getWidth()/4;
         for(int i = 0; i < universitiesCount; i++) {
 
             cursor.moveToPosition(Integer.parseInt(ids[i]) - 1);
+            Item item = new Item(cursor.getString(cursor.getColumnIndex(UniversitiesTable.NAME.toString())),cursor.getString(cursor.getColumnIndex(UniversitiesTable.CITY.toString())));
 
-            TableRow tableRow = new TableRow(this);
-            TextView tvUniversityName = new TextView(this);
-            TextView tvUniversityCity = new TextView(this);
-
-            tableRow.setPadding(5, 10, 5, 10);
-            tvUniversityName.setPadding(0,0,5,0);
-
-            tvUniversityName.setTextSize(16);
-            tvUniversityCity.setTextSize(16);
-
-            tableRow.setTag(TAG_KEY, new Integer(Integer.parseInt(ids[i])));
-            tableRow.setOnClickListener(new TableRowClickListener());
-            tableRow.setClickable(true);
-
-            tvUniversityName.setWidth(screenDivider*3 - 15);
-            tvUniversityCity.setWidth(screenDivider);
-
-            tvUniversityName.setText(cursor.getString(cursor.getColumnIndex(UniversitiesTable.NAME.toString())));
-            tvUniversityCity.setText(cursor.getString(cursor.getColumnIndex(UniversitiesTable.CITY.toString())));
-
-            tableRow.addView(tvUniversityName);
-            tableRow.addView(tvUniversityCity);
-
-            tableLayout.addView(tableRow);
+            item.setTag(Integer.parseInt(ids[i]));
+            adapter.add(item);
         }
         cursor.close();
-    }
-
-    private class TableRowClickListener implements View.OnClickListener{
-
-        @Override
-        public void onClick(View v) {
-            TableRow tr = (TableRow) v;
-            int i = (int) tr.getTag(TAG_KEY);
-            Intent intent = new Intent(v.getContext(), UniversityActivity.class);
-            intent.putExtra(EXTRA_KEY_UNIVERSITY,String.valueOf(i));
-            startActivity(intent);
-        }
     }
 }

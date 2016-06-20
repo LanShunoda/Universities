@@ -24,6 +24,10 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Arrays;
 
 /**
@@ -53,6 +57,10 @@ public class UniversitiesActivity extends BaseActivity {
             }
         });
         fillTable();
+        MobileAds.initialize(this, getString(R.string.ads_app_id));
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private void fillTable() {

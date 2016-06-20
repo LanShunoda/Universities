@@ -23,4 +23,6 @@
     <string name="emptyFavourites">You dont have favourites</string>
     <string name="favouritesAndroidVersionError">no favourites on this android version</string>
     <string name="noFaculties">There is no information about faculties</string>
+    <string name="ads_app_id">ca-app-pub-5856709212349553~1580425826</string>
+    <string name="ads_banner_id">ca-app-pub-5856709212349553/4394291420</string>
 </resources>
